@@ -24,23 +24,23 @@ function App() {
 
                 <Route path='/activities'>
                     <Activities />
-                </Routine>
+                </Route>
 
                 <Route path='/login'>
                     <Login />
-                </Routine>
+                </Route>
 
                 <Route path='/my-routines'>
                     <MyRoutines />
-                </Routine>
+                </Route>
 
                 <Route path='/register'>
                     <Register />
-                </Routine>
+                </Route>
 
                 <Route path='/routines'>
                     <Routines />
-                </Routine>
+                </Route>
 
 
                 <Route exact path='/'>
