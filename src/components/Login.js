@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Redirect } from 'react-router-dom'
-import { BASE_URL } from './Api'
+import { BASE_URL } from '../api/Api'
 
 const Login = (props) => {
     const [formSubmittedSuccessfully, setFormSubmittedSuccessfully] = useState(false);
