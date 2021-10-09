@@ -7,61 +7,7 @@ export default function Register() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-    // const [posting, setPosting] = useState(false)
-
-
-    // function checkUsername() {
-    //     if (username === "") {
-    //         setError("Please enter a username!!!")
-    //     }
-    // }
-
-    // function checkPassword() {
-    //     if (password === "") {
-    //         setError("Please enter a password!")
-    //     } else if (password.length <= 7) {
-    //         setError("Password must be atleast 8 characters!")
-    //     }
-    // }
-
-    // function checkConfirmPassword() {
-    //     if (confirmPassword === "") {
-    //         setError("Please confirm your password!")
-    //     }
-    // }
-
-    // function checkPasswordsMatch() {
-    //     if (password !== confirmPassword && password !== "") {
-    //         setError("Your passwords do not match, please try again!!!")
-    //     } else {
-    //         setError("")
-    //     }
-    // }
-
-    // async function handleRegister() {
-
-    //     console.log("Button has been clicked")
-    //     console.log("User: ", username)
-    //     console.log("Password: ", password)
-    //     console.log("ConfirmPassword: ", confirmPassword)
-
-
-    //     checkPasswordsMatch()
-    //     checkConfirmPassword()
-    //     checkPassword()
-    //     checkUsername()
-
-    //     if (error === "") {
-    //         const userInfo = { username, password }
-
-    //         //const response = await registerUser(userInfo)
-
-    //         console.log("A request was sent", userInfo)
-    //     }
-
-    // }
-
-
+ 
     async function handleRegister(event) {
         setError("")
 
