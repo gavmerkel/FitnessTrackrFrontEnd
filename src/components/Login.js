@@ -4,6 +4,7 @@ import { logUserIn } from '../api/Api'
 
 const Login = (props) => {
 
+    const { setLoggedInUser } = props
     const [error, setError] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -36,6 +37,9 @@ const Login = (props) => {
                 if (data.message === "Username or password is incorrect") {
                     setError(data.message)
                 } else if (data.message === "you're logged in!") {
+
+                    localStorage.setItem("CurrentUserToken", data.token)
+                    setLoggedInUser(data.token)
                     setError(data.message)
                 }
 
@@ -57,6 +61,7 @@ const Login = (props) => {
             <input type="password" placeholder="Please create a password" value={password} onChange={e => setPassword(e.target.value)}/>
             <button onClick={handleRegister}>Log In</button>
             <p>Don't have an account? <Link to="/register" >Register here</Link></p>
+            <Link to="/"><button>Home Page</button></Link>
         </div>
         </>
     )
