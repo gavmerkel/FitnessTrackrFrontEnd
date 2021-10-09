@@ -1,94 +1,68 @@
 import React, {useState} from 'react'
-import { Redirect } from 'react-router-dom'
-import { BASE_URL } from '../api/Api'
+import { Redirect, Link } from 'react-router-dom'
+import { logUserIn } from '../api/Api'
 
 const Login = (props) => {
-    const [formSubmittedSuccessfully, setFormSubmittedSuccessfully] = useState(false);
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const {loggedInUser, setLoggedinUser} = props
-    const [error, setError] = useState(null)
 
-    async function authenticate(event) {
-        event.preventDefault();
+    const { setLoggedInUser } = props
+    const [error, setError] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+ 
+    async function handleRegister(event) {
+        setError("")
 
-        setFormSubmittedSuccessfully(false)
-        setError(null)
-        
-        if(username !== '') {
+        if(username !== "") {
             checkPassword()
         } else {
-            setError('Please enter a valid username!')
+            setError('Please enter a username!!!')
         }
 
         async function checkPassword() {
-            if(password !== '') {
-                logIn()
+            if(password !== "") {
+                const userData = { username, password }
+
+                sendUserData(userData)
             } else {
-                setError('Please enter a valid password or click "SIGN UP" to create an account!')
+                setError('Please enter a password!!!')
             }
         }
 
-        async function logIn() {
-            try {
-                const result = await fetch(`${BASE_URL}/users/login`, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        user: {
-                            username: username,
-                            password: password
-                        }
-                    })
-                })
+        async function sendUserData(userData) {
+            try{
+                const data = await logUserIn(userData)
 
-            const loginResponse = await result.json()
+                console.log(data)
+                //data.message
+                if (data.message === "Username or password is incorrect") {
+                    setError(data.message)
+                } else if (data.message === "you're logged in!") {
 
-            if(loginResponse.success === false) {
-                setError(loginResponse.error.message)
-                setUsername('')
-                setPassword('')
-                return;
-            } else if(loginResponse.success === true) {
-                localStorage.setItem('currentUserToken', loginResponse.data.token)
-                localStorage.setItem('currentUserUsername', username)
-                setLoggedinUser(loginResponse.data.token)
-                setFormSubmittedSuccessfully(true)
-            }
+                    localStorage.setItem("CurrentUserToken", data.token)
+                    setLoggedInUser(data.token)
+                    setError(data.message)
+                }
 
-            } catch(error) {
-                console.log(error)
+            } catch (error) {
+                setError('Something went wrong! Try again.')
             }
         }
-    }
 
-    if(formSubmittedSucessfully) {
-        return <Redirect to="/home" />
     }
+    
 
     return (
         <>
-        {EmptyHeader}
-
-        {error ? <Alert variant='danger'>{error}</Alert> : null}
-
-        <section className="login">
-            <form onSubmit={authenticate}>
-                <label>
-                    Username:
-                    <input type="text" username="username" onChange={(event) => setUsername(event.target.value)} value={username}/>
-                </label>
-                <label>
-                    <input type="password" password="password" onChange={(event) => setPassword(event.target.value)} value={password}/>
-                </label>
-
-                <button type="submit">LOGIN</button>
-
-                <link className="lnkBtn" to="/sign-up">SIGN UP</link>
-            </form>
-        </section>
+        <div style={ error === "you're logged in!" ? {backgroundColor: 'darkgreen', color: 'lightblue'} : {backgroundColor: 'red', color: 'black'}}>
+            {error}
+        </div>
+        <div>
+            <input type="text" placeholder="Please create a username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+            <input type="password" placeholder="Please create a password" value={password} onChange={e => setPassword(e.target.value)}/>
+            <button onClick={handleRegister}>Log In</button>
+            <p>Don't have an account? <Link to="/register" >Register here</Link></p>
+            <Link to="/"><button>Home Page</button></Link>
+        </div>
         </>
     )
 }

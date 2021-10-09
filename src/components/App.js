@@ -13,49 +13,51 @@ import Routines from './Routines'
 
 function App() {
 
+    const [loggedInUser, setLoggedInUser] = useState(null)
 
-  return (
-    <div>
-        <Router>
-            <Switch>
-                <Route path='/home'>
-                    <Home />
-                </Route>
+    return (
+        <div>
+            <Router>
+                <Switch>
 
-                <Route path='/activities'>
-                    <Activities />
-                </Route>
+                    <Route path='/home'>
+                        <Home />
+                    </Route>
 
-                <Route path='/login'>
-                    <Login />
-                </Route>
+                    <Route path='/activities'>
+                        <Activities />
+                    </Route>
 
-                <Route path='/my-routines'>
-                    <MyRoutines />
-                </Route>
+                    <Route path='/login'>
+                        <Login 
+                        setLoggedInUser={setLoggedInUser}/>
+                    </Route>
 
-                <Route path='/register'>
-                    <Register />
-                </Route>
+                    <Route path='/my-routines'>
+                        <MyRoutines />
+                    </Route>
 
-                <Route path='/routines'>
-                    <Routines />
-                </Route>
+                    <Route path='/register'>
+                        <Register />
+                    </Route>
 
+                    <Route path='/routines'>
+                        <Routines />
+                    </Route>
 
-                <Route exact path='/'>
-                    <Redirect to='/home' />
-                </Route>
+                    <Route exact path='/'>
+                        <Redirect to='/home' />
+                    </Route>
 
-                {/* <Route path="*">
-                    <UnknownPath EmptyHeader={<EmptyHeader/>}
-                    />  
-                </Route> */}
+                    {/* <Route path="*">
+                        <UnknownPath EmptyHeader={<EmptyHeader/>}
+                        />  
+                    </Route> */}
 
-            </Switch>
-        </Router>
-    </div>
-  )
+                </Switch>
+            </Router>
+        </div>
+    )
 }
 
 export default App;
