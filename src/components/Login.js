@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import { Redirect } from 'react-router-dom'
-import { BASE_URL } from './api'
-import { Alert } from 'react-bootstrap'
+import { BASE_URL } from '../api/Api'
 
 const Login = (props) => {
-    const [formSubmittedSucessfully, setFormSubmittedSuccessfully] = useState(false);
+    const [formSubmittedSuccessfully, setFormSubmittedSuccessfully] = useState(false);
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const {loggedInUser, setLoggedinUser} = props
