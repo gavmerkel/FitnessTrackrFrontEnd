@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { registerUser } from '../api/Api'
 
 export default function Register() {
@@ -48,9 +49,6 @@ export default function Register() {
                 const data = await registerUser(userData)
 
                 console.log(data)
-                data.message
-                console.log("you're signed up!")
-                console.log("A user by that username already exists")
                 if (data.message === "A user by that username already exists") {
                     setError(data.message)
                 } else if (data.message === "you're signed up!") {
@@ -75,6 +73,7 @@ export default function Register() {
             <input type="password" placeholder="Please create a password" value={password} onChange={e => setPassword(e.target.value)}/>
             <input type="password" placeholder="Please confirm your password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
             <button onClick={handleRegister}>Register Account</button>
+            <p>Already have an account? <Link to="/login" >Log in here</Link></p>
         </div>
         </>
     )
