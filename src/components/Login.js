@@ -45,17 +45,17 @@ const Login = (props) => {
                     })
                 })
 
-            const data = await result.json()
+            const loginResponse = await result.json()
 
-            if(data.success === false) {
-                setError(data.error.message)
+            if(loginResponse.success === false) {
+                setError(loginResponse.error.message)
                 setUsername('')
                 setPassword('')
                 return;
-            } else if(data.success === true) {
-                localStorage.setItem('currentUserToken', data.data.token)
+            } else if(loginResponse.success === true) {
+                localStorage.setItem('currentUserToken', loginResponse.data.token)
                 localStorage.setItem('currentUserUsername', username)
-                setLoggedinUser(data.data.token)
+                setLoggedinUser(loginResponse.data.token)
                 setFormSubmittedSuccessfully(true)
             }
 
