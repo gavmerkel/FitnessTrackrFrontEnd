@@ -68,13 +68,13 @@ export default function Register() {
         <div style={ error === "Thank you for Signing up!" ? {backgroundColor: 'darkgreen', color: 'lightblue'} : {backgroundColor: 'red', color: 'black'}}>
             {error}
         </div>
-        <div>
+        <form onSubmit={handleRegister}>
             <input type="text" placeholder="Please create a username" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <input type="password" placeholder="Please create a password" value={password} onChange={e => setPassword(e.target.value)}/>
             <input type="password" placeholder="Please confirm your password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
-            <button onClick={handleRegister}>Register Account</button>
+            <button type="submit">Register Account</button>
             <p>Already have an account? <Link to="/login" >Log in here</Link></p>
-        </div>
+        </form>
         </>
     )
 }

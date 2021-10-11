@@ -45,3 +45,47 @@ export async function logUserIn({username, password}) {
         throw error
     }
 }
+
+export async function getAllActivities() {
+
+    try {
+
+        const getReq = await fetch(`${BASE_URL}/activities`)
+
+        const data = await getReq.json()
+
+        return data
+
+    } catch (error) {
+        throw error
+    }
+
+}
+
+export async function createAnActivity({activityName, activityDesc}) {
+
+    try {
+
+        const token = localStorage.getItem("CurrentUserToken")
+
+        const postReq = await fetch(`${BASE_URL}/activities`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                name: activityName,
+                description: activityDesc
+            }),
+        })
+
+        const data = postReq.json()
+
+        return data
+
+    } catch (error) {
+        throw error
+    }
+
+}

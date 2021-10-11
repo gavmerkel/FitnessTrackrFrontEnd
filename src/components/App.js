@@ -13,7 +13,6 @@ import Routines from './Routines'
 
 function App() {
 
-    const [loggedInUser, setLoggedInUser] = useState(null)
 
     return (
         <div>
@@ -29,8 +28,7 @@ function App() {
                     </Route>
 
                     <Route path='/login'>
-                        <Login 
-                        setLoggedInUser={setLoggedInUser}/>
+                        <Login />
                     </Route>
 
                     <Route path='/my-routines'>

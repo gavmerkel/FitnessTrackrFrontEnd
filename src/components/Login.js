@@ -2,9 +2,8 @@ import React, {useState} from 'react'
 import { Redirect, Link } from 'react-router-dom'
 import { logUserIn } from '../api/Api'
 
-const Login = (props) => {
+const Login = () => {
 
-    const { setLoggedInUser } = props
     const [error, setError] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -39,7 +38,6 @@ const Login = (props) => {
                 } else if (data.message === "you're logged in!") {
 
                     localStorage.setItem("CurrentUserToken", data.token)
-                    setLoggedInUser(data.token)
                     setError(data.message)
                 }
 
@@ -56,13 +54,13 @@ const Login = (props) => {
         <div style={ error === "you're logged in!" ? {backgroundColor: 'darkgreen', color: 'lightblue'} : {backgroundColor: 'red', color: 'black'}}>
             {error}
         </div>
-        <div>
+        <form onSubmit={handleRegister}>
             <input type="text" placeholder="Please create a username" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <input type="password" placeholder="Please create a password" value={password} onChange={e => setPassword(e.target.value)}/>
-            <button onClick={handleRegister}>Log In</button>
+            <button type="submit">Log In</button>
             <p>Don't have an account? <Link to="/register" >Register here</Link></p>
             <Link to="/"><button>Home Page</button></Link>
-        </div>
+        </form>
         </>
     )
 }
