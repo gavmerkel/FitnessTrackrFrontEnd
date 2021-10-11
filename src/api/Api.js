@@ -111,45 +111,23 @@ export async function createNewRoutine({routineName, routineGoal, routineIsPubli
     try {
 
         const token = localStorage.getItem("CurrentUserToken")
-
-        if (routineIsPublic) {
-
-            const response = await fetch(`${BASE_URL}/routines`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    name: routineName,
-                    goal: routineGoal,
-                    isPublic: routineIsPublic
-                })
+        
+        const response = await fetch(`${BASE_URL}/routines`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                name: routineName,
+                goal: routineGoal,
+                isPublic: routineIsPublic
             })
+        })
 
-            const data = await response.json()
+        const data = await response.json()
 
-            return data
-
-        } else if (!routineIsPublic) {
-
-            const response = await fetch(`${BASE_URL}/routines`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    name: routineName,
-                    goal: routineGoal
-                })
-            })
-
-            const data = await response.json()
-
-            return data
-
-        }
+        return data
         
     } catch (error) {
         throw error
