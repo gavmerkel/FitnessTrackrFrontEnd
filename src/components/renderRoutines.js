@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { Redirect, Link } from 'react-router-dom'
-import { BASE_URL } from './api'
+import { BASE_URL } from '../api/Api'
 
 export default function RenderRoutines(routine) {
 
+    console.log("ROUTINE", routine)
     const { name, goal, creatorName} = routine
-    const { activityName, description, duration } = activity
+    //const { activityName, description, duration } = activity
     const [currentlyEditing, setCurrentlyEditing] = useState(false)
 
     async function handleDelete(routineId) {
@@ -15,7 +16,7 @@ export default function RenderRoutines(routine) {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem('currentUserToken')}`
+                    "Authorization": `Bearer ${localStorage.getItem('CurrentUserToken')}`
                 }
             })
 
@@ -26,9 +27,9 @@ export default function RenderRoutines(routine) {
             console.error(error)
         }
     }
-}
 
-return (<Card className="routineCard">
+    
+    return (<Card className="routineCard">
     <Card.Body className="square border border-4 border-dark">
 
         <Card.Title>{name}</Card.Title>
@@ -39,4 +40,5 @@ return (<Card className="routineCard">
             <p></p>
         </Card.Footer>
     </Card.Body>
-</Card>)
+    </Card>)
+}
