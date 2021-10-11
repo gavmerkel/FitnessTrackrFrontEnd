@@ -89,3 +89,70 @@ export async function createAnActivity({activityName, activityDesc}) {
     }
 
 }
+
+export async function getAllRoutines() {
+
+    try {
+
+        const response = await fetch(`${BASE_URL}/routines`)
+
+        const data = await response.json()
+
+        return data
+
+    } catch (error) {
+        throw error
+    }
+
+}
+
+export async function createNewRoutine({routineName, routineGoal, routineIsPublic}) {
+
+    try {
+
+        const token = localStorage.getItem("CurrentUserToken")
+
+        if (routineIsPublic) {
+
+            const response = await fetch(`${BASE_URL}/routines`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: routineName,
+                    goal: routineGoal,
+                    isPublic: routineIsPublic
+                })
+            })
+
+            const data = await response.json()
+
+            return data
+
+        } else if (!routineIsPublic) {
+
+            const response = await fetch(`${BASE_URL}/routines`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: routineName,
+                    goal: routineGoal
+                })
+            })
+
+            const data = await response.json()
+
+            return data
+
+        }
+        
+    } catch (error) {
+        throw error
+    }
+
+}

@@ -10,6 +10,8 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState("")
  
     async function handleRegister(event) {
+        event.preventDefault()
+
         setError("")
 
         if(username !== "") {

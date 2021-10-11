@@ -9,6 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState("")
  
     async function handleRegister(event) {
+        event.preventDefault()
         setError("")
 
         if(username !== "") {
@@ -55,8 +56,8 @@ const Login = () => {
             {error}
         </div>
         <form onSubmit={handleRegister}>
-            <input type="text" placeholder="Please create a username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-            <input type="password" placeholder="Please create a password" value={password} onChange={e => setPassword(e.target.value)}/>
+            <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+            <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
             <button type="submit">Log In</button>
             <p>Don't have an account? <Link to="/register" >Register here</Link></p>
             <Link to="/"><button>Home Page</button></Link>

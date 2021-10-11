@@ -36,7 +36,7 @@ export default function Activities() {
 
         //console.log(activity)
         return <div style={{border: "solid darkGreen", padding: "15px", margin: "0.5em"}} key={activity.id}>
-            <p style={{marginTop: "0.25em", marginBottom: "0.25em"}}>Name: { activity.name } </p>
+            <p style={{marginTop: "0.25em", marginBottom: "0.25em"}}>Activity Name: { activity.name } </p>
             <p style={{marginTop: "0.25em", marginBottom: "0.25em"}}>Description: { activity.description } </p>
         </div>
 

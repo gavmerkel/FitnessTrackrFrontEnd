@@ -16,7 +16,10 @@ export default function Home() {
         <div>
             HomePage
         </div>
-        <Link to='activities'><button>Activities Page</button></Link>
+        <Link to='/activities'><button>Activities Page</button></Link>
+        <Link to='/routines'><button>Routines Page</button></Link>
+        {loggedIn ? <Link to='/my-routines'><button>My Routines Page</button></Link> : ""}
+
         {!loggedIn ? <Link to='login'><button>Log in</button></Link> : <button onClick={handleLogOut}>Log Out</button> }
         
 
